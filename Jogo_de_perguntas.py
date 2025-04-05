@@ -1,7 +1,10 @@
 import json
 import random
+import time
 
-with open("perguntas.json", "r+") as file: perguntas = json.load(file)  # abre o json
+with open("perguntas.json", encoding="utf-8") as file:
+    perguntas = json.load(file)  # abre o json
+
 
 id_perguntas = {int(k): v for k, v in perguntas.items()}  # tranforma o id em int
 perguntas_tamanho_dict = len(perguntas)  # define o tamanho de dicionario
@@ -12,8 +15,6 @@ respostas_erradas = 0
 rodadas_jogadas = 0
 
 
-# print(perguntas, type(perguntas))
-
 def randomiza_pergunta():
     random_da_pergunta = random.randrange(1, perguntas_tamanho_dict + 1)  # define o range do random conforme o tamanho do dicionário
     return random_da_pergunta
@@ -22,7 +23,9 @@ def randomiza_pergunta():
 perguntas_ja_respondidas = []
 
 
-def pergunta(pergunta_selecionada):  # cria uma funcao para ser chamado no futuro junto com os print para o console
+def pergunta(
+    pergunta_selecionada,
+):  # cria uma funcao para ser chamado no futuro junto com os print para o console
     nome = ""  # Nome da pergunta
     opcoes = ["", "", "", ""]
 
@@ -56,7 +59,7 @@ def jogar(respostas_corretas, respostas_erradas):
     print(opcao_3)
     print(opcao_4)
     print()
-    print('Responda a alternativa correta')
+    print("Responda a alternativa correta")
     resposta_do_user = input()
     while resposta_do_user != "1" and resposta_do_user != "2" and resposta_do_user != "3" and resposta_do_user != "4":
         print("responda uma alternativa valida")
@@ -75,6 +78,7 @@ def jogar(respostas_corretas, respostas_erradas):
 
 # adiciona pergunta
 
+
 def adiciona_pergunta():
     id_nova_pergunda = max(id_perguntas.keys()) + 1
     novo_nome_pergunta = input("Digite o nome da pergunta: ")
@@ -92,7 +96,7 @@ def adiciona_pergunta():
     perguntas[str(id_nova_pergunda)] = {
         "pergunta": novo_nome_pergunta,
         "opcoes": opcao,
-        "resposta": int(nova_resposta)
+        "resposta": int(nova_resposta),
     }
 
     with open("perguntas.json", "w", encoding="utf-8") as file:
@@ -101,13 +105,18 @@ def adiciona_pergunta():
 
 # EXCLUIR PERGUNTA
 def excluir_pergunta():
-    pergunta_selecionada = id_perguntas[1]
-    nome_pergunta, opcao_1, opcao_2, opcao_3, opcao_4, resposta_pergunta = pergunta(pergunta_selecionada)
-    print(nome_pergunta)
-
+    print("Escolha o id da pergunta que deseja excluir")
+    print("id das perguntas disponíveis")
+    for pergunta_id in perguntas.keys():
+        pergunta_selecionada = id_perguntas[int(pergunta_id)]
+        nome_pergunta, opcao_1, opcao_2, opcao_3, opcao_4, resposta_pergunta = pergunta(pergunta_selecionada)
+        print()
+        print(pergunta_id + " - " + nome_pergunta)
+    time.sleep(1)
 
 # menu do programa
 sair_progrma = False
+
 
 def menu(rodadas_jogadas, respostas_corretas, respostas_erradas, sair_progrma):
     print()
@@ -128,24 +137,24 @@ def menu(rodadas_jogadas, respostas_corretas, respostas_erradas, sair_progrma):
     match resposta_do_user:
         case 1:
             print("Você selecionou Jogar")
-            print('quantas rodadas vai querer')
+            print("quantas rodadas vai querer")
             print(f"de 1 a {perguntas_tamanho_dict}")
             rodadas_selecionada = input()
             0
             while int(rodadas_selecionada) > perguntas_tamanho_dict:
-                print('você escolheu um numero incompatível')
+                print("você escolheu um numero incompatível")
                 print(f"escolha um numero de 1 a {perguntas_tamanho_dict}")
                 rodadas_selecionada = input()
             while rodadas_jogadas < int(rodadas_selecionada):
                 print(f"\nRodada {rodadas_jogadas + 1}")
                 respostas_corretas, respostas_erradas = jogar(respostas_corretas, respostas_erradas)
                 rodadas_jogadas += 1
-            print('voce finalizou o jogo ')
+            print("voce finalizou o jogo ")
             print()
-            print('--------Placar--------')
-            print(f'Você jogou um total de {rodadas_jogadas} rodadas')
-            print(f'Você acertou um total de {respostas_corretas} respostas')
-            print(f'Você errou um total de {respostas_erradas} respostas')
+            print("--------Placar--------")
+            print(f"Você jogou um total de {rodadas_jogadas} rodadas")
+            print(f"Você acertou um total de {respostas_corretas} respostas")
+            print(f"Você errou um total de {respostas_erradas} respostas")
 
         case 2:
             adiciona_pergunta()
@@ -153,7 +162,8 @@ def menu(rodadas_jogadas, respostas_corretas, respostas_erradas, sair_progrma):
             excluir_pergunta()
         case 0:
             sair_progrma = True
-            print('vc saiu')
+            print("vc saiu")
+            return sair_progrma
 
 
 while not sair_progrma:
