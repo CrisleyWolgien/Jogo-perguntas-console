@@ -1,0 +1,52 @@
+{
+    "1": {
+        "pergunta": "Qual a capital do Brasil?",
+        "opcoes": [
+            "1. BrasÃƒÆ’Ã‚Â­lia",
+            "2. SÃƒÆ’Ã‚Â£o Paulo",
+            "3. Rio de Janeiro",
+            "4. Salvador"
+        ],
+        "resposta": 1
+    },
+    "2": {
+        "pergunta": "Quanto ÃƒÆ’Ã‚Â© 2 + 2?",
+        "opcoes": [
+            "1. 3",
+            "2. 4",
+            "3. 5",
+            "4. 22"
+        ],
+        "resposta": 2
+    },
+    "3": {
+        "pergunta": "teste",
+        "opcoes": [
+            "1.teste1",
+            "2.teste2",
+            "3.teste3",
+            "4.teste4"
+        ],
+        "resposta": 1
+    },
+    "4": {
+        "pergunta": "qual idade tem o crisley",
+        "opcoes": [
+            "1.18",
+            "2.25",
+            "3.17",
+            "4.20"
+        ],
+        "resposta": 4
+    },
+    "5": {
+        "pergunta": "teste",
+        "opcoes": [
+            "1.teste",
+            "2.teste",
+            "3.teste",
+            "4.teste"
+        ],
+        "resposta": 4
+    }
+}
